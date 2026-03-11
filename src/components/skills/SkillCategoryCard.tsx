@@ -4,11 +4,11 @@ import { AnimatePresence, motion } from "framer-motion";
 import { type SkillCategory, type TechLevel } from "@/data/skills";
 
 const TECH_ORDER: Record<TechLevel, number> = {
-  uzman: 0, iyi: 1, orta: 2, başlangıç: 3,
+  expert: 0, proficient: 1, intermediate: 2, beginner: 3,
 };
 
 const LANG_ORDER: Record<string, number> = {
-  Anadil: 0, C2: 1, C1: 2, B2: 3, B1: 4, A2: 5, A1: 6,
+  Native: 0, C2: 1, C1: 2, B2: 3, B1: 4, A2: 5, A1: 6,
 };
 
 type Props = {
@@ -20,14 +20,14 @@ type Props = {
 };
 
 const TECH_LEVEL_STYLE: Record<TechLevel, string> = {
-  uzman:      "border-cyan-700/60 bg-cyan-950/40 text-cyan-400",
-  iyi:        "border-blue-700/50 bg-blue-950/30 text-blue-400",
-  orta:       "border-slate-600/50 bg-slate-800/40 text-slate-400",
-  başlangıç:  "border-slate-700/40 bg-slate-900/30 text-slate-600",
+  expert:       "border-cyan-700/60 bg-cyan-950/40 text-cyan-400",
+  proficient:   "border-blue-700/50 bg-blue-950/30 text-blue-400",
+  intermediate: "border-slate-600/50 bg-slate-800/40 text-slate-400",
+  beginner:     "border-slate-700/40 bg-slate-900/30 text-slate-600",
 };
 
 const LANG_LEVEL_STYLE: Record<string, string> = {
-  Anadil: "border-emerald-700/60 bg-emerald-950/40 text-emerald-400",
+  Native: "border-emerald-700/60 bg-emerald-950/40 text-emerald-400",
   C2:     "border-cyan-700/60 bg-cyan-950/40 text-cyan-400",
   C1:     "border-blue-700/50 bg-blue-950/30 text-blue-400",
   B2:     "border-indigo-700/50 bg-indigo-950/30 text-indigo-400",
@@ -84,7 +84,7 @@ export function SkillCategoryCard({ category, index, isExpanded, onExpand, onCol
 
         <div className="flex items-center gap-3">
           <span className="font-mono text-[10px] tracking-[0.14em] text-slate-700">
-            {String(category.items.length).padStart(2, "0")} öğe
+            {String(category.items.length).padStart(2, "0")} items
           </span>
           <button
             type="button"

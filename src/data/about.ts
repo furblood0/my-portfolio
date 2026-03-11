@@ -1,8 +1,9 @@
 export type ExperienceItem = {
-  period: string;   // "Haz 2023 – Eyl 2023"
+  period: string;
   title: string;
   company: string;
-  type?: string;    // "Staj" | "Tam Zamanlı" | "Freelance" vb.
+  location?: string;
+  type?: string;
   description?: string;
 };
 
@@ -11,6 +12,7 @@ export type EducationItem = {
   degree: string;
   department: string;
   school: string;
+  location?: string;
   gpa?: string;
   description?: string;
 };
@@ -24,43 +26,46 @@ export type AboutData = {
 };
 
 export const ABOUT: AboutData = {
-  name: "Furkan",
-  title: "Full-Stack Developer",
+  name: "Furkan Fidan",
+  title: "Software Developer",
   bio: [
-    "Merhaba, ben Furkan. Kullanıcı deneyimini ön planda tutan, temiz ve sürdürülebilir kod yazmayı seven bir full-stack geliştiriciyim.",
-    "Frontend'de React ve Next.js ile modern, performanslı arayüzler inşa ediyorum. Backend tarafında Node.js ve Python ile çalışıyorum. Animasyon ve etkileşim tasarımına özellikle ilgi duyuyorum.",
+    "Hi, I'm Furkan. I'm a computer engineering student and software developer with a passion for building cross-platform products — from polished web apps with React and Next.js to mobile experiences with Flutter.",
+    "I enjoy working across the full stack because I believe understanding the whole picture makes you a better developer at every layer.",
   ],
   experience: [
     {
-      period: "2024 – Günümüz",
-      title: "Full-Stack Developer",
-      company: "Serbest / Freelance",
-      type: "Freelance",
-      description: "Web uygulamaları ve portfolyo projeleri geliştirme.",
+      period: "Sep 2025 – Nov 2025",
+      title: "Research Intern",
+      company: "University of Groningen",
+      location: "Groningen, Netherlands",
+      type: "Internship",
+      description: "Developed an SDN-based load balancer in Python to optimize network traffic flows and reduce latency. Conducted failover testing to ensure fault tolerance across large-scale data traffic distributions.",
     },
     {
-      period: "Eyl 2023 – Şub 2024",
-      title: "Frontend Developer",
-      company: "Şirket Adı",
-      type: "Staj",
-      description: "React tabanlı uygulamalar, component kütüphanesi geliştirme.",
+      period: "Jun 2025 – Jul 2025",
+      title: "SAP Intern",
+      company: "Konya Şeker Sanayi ve Ticaret A.Ş.",
+      location: "Konya, Turkey",
+      type: "Internship",
+      description: "Analyzed business workflows across SAP FI, CO, and MM modules to improve process visibility. Identified system bottlenecks and authored technical documentation to standardize SAP procedures.",
     },
     {
-      period: "Haz 2023 – Eyl 2023",
-      title: "Backend Developer",
-      company: "Şirket Adı 2",
-      type: "Staj",
-      description: "Node.js ile REST API geliştirme.",
+      period: "Jul 2024 – Aug 2024",
+      title: "Mobile Developer Intern",
+      company: "Atiker Yazılım",
+      location: "Konya, Turkey",
+      type: "Internship",
+      description: "Designed and deployed a full-stack mobile application from scratch within the Clomosy system. Developed components using TRObject and managed local data storage with SQLite.",
     },
   ],
   education: [
     {
-      period: "2020 – 2024",
-      degree: "Lisans",
-      department: "Bilgisayar Mühendisliği",
-      school: "Üniversite Adı",
-      gpa: "3.40 / 4.00",
-      description: "Veri yapıları, algoritmalar, yazılım mühendisliği odaklı müfredat.",
+      period: "Sep 2021 – Jul 2026 (Expected)",
+      degree: "Bachelor of Science",
+      department: "Computer Engineering",
+      school: "Konya Food and Agriculture University",
+      location: "Konya, Turkey",
+      gpa: "3.14 / 4.00",
     },
   ],
 };

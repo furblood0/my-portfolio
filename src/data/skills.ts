@@ -1,5 +1,5 @@
-export type TechLevel = "uzman" | "iyi" | "orta" | "başlangıç";
-export type LangLevel = "Anadil" | "C2" | "C1" | "B2" | "B1" | "A2" | "A1";
+export type TechLevel = "expert" | "proficient" | "intermediate" | "beginner";
+export type LangLevel = "Native" | "C2" | "C1" | "B2" | "B1" | "A2" | "A1";
 
 export type SkillItem =
   | { kind: "tech";     name: string; level: TechLevel }
@@ -22,85 +22,103 @@ export type SkillGroup = {
 export const SKILL_GROUPS: SkillGroup[] = [
   {
     id: "technical",
-    label: "Teknik",
+    label: "Technical",
     categories: [
       {
         id: "frontend",
         label: "Frontend",
         items: [
-          { kind: "tech", name: "React / Next.js",  level: "uzman"      },
-          { kind: "tech", name: "TypeScript",        level: "iyi"        },
-          { kind: "tech", name: "Tailwind CSS",      level: "uzman"      },
-          { kind: "tech", name: "Framer Motion",     level: "iyi"        },
-          { kind: "tech", name: "HTML / CSS",        level: "uzman"      },
+          { kind: "tech", name: "React",        level: "expert"       },
+          { kind: "tech", name: "Next.js",       level: "expert"       },
+          { kind: "tech", name: "Tailwind CSS",  level: "expert"       },
+          { kind: "tech", name: "TypeScript",    level: "proficient"   },
+          { kind: "tech", name: "JavaScript",    level: "proficient"   },
         ],
       },
       {
         id: "backend",
         label: "Backend",
         items: [
-          { kind: "tech", name: "Node.js",       level: "iyi"        },
-          { kind: "tech", name: "Express",       level: "iyi"        },
-          { kind: "tech", name: "Python",        level: "orta"       },
-          { kind: "tech", name: "PostgreSQL",    level: "orta"       },
-          { kind: "tech", name: "MongoDB",       level: "orta"       },
+          { kind: "tech", name: "Node.js / Express", level: "proficient"   },
+          { kind: "tech", name: "Python",             level: "proficient"   },
+          { kind: "tech", name: "Java",               level: "intermediate" },
+          { kind: "tech", name: "Dart Frog",          level: "intermediate" },
+          { kind: "tech", name: "PostgreSQL",         level: "proficient"   },
+          { kind: "tech", name: "SQLite",             level: "proficient"   },
+          { kind: "tech", name: "MSSQL",              level: "intermediate" },
+        ],
+      },
+      {
+        id: "mobile",
+        label: "Mobile",
+        items: [
+          { kind: "tech", name: "Flutter",            level: "proficient"   },
+          { kind: "tech", name: "Dart",               level: "proficient"   },
+          { kind: "tech", name: "Riverpod / Provider",level: "proficient"   },
+          { kind: "tech", name: "Hive",               level: "proficient"   },
+          { kind: "tech", name: "Firebase",           level: "intermediate" },
         ],
       },
       {
         id: "tools",
         label: "Tools & DevOps",
         items: [
-          { kind: "tech", name: "Git / GitHub",    level: "uzman"    },
-          { kind: "tech", name: "Docker",          level: "başlangıç" },
-          { kind: "tech", name: "Figma",           level: "orta"     },
-          { kind: "tech", name: "VS Code / Cursor",level: "uzman"    },
+          { kind: "tech", name: "Git / GitHub",    level: "expert"       },
+          { kind: "tech", name: "Docker",          level: "intermediate" },
+          { kind: "tech", name: "Figma",           level: "intermediate" },
+          { kind: "tech", name: "GitHub Actions",  level: "beginner"     },
+          { kind: "tech", name: "Linux",           level: "beginner"     },
+          { kind: "tech", name: "SAP",             level: "beginner"     },
+          { kind: "tech", name: "Postman",         level: "beginner"     },
         ],
       },
     ],
   },
   {
     id: "methodology",
-    label: "Metodoloji",
+    label: "Methodology",
     categories: [
       {
         id: "practices",
-        label: "Çalışma Pratikleri",
+        label: "Work Practices",
         items: [
           { kind: "method", name: "Agile / Scrum" },
           { kind: "method", name: "Clean Code" },
-          { kind: "method", name: "Component-Driven Development" },
-          { kind: "method", name: "REST API Tasarımı" },
-          { kind: "method", name: "Code Review" },
+          { kind: "method", name: "REST API Design" },
           { kind: "method", name: "Responsive Design" },
+          { kind: "method", name: "Version Control (Git Flow)" },
+          { kind: "method", name: "Cross-Platform Development" },
+          { kind: "method", name: "MVC / MVVM" },
         ],
       },
     ],
   },
   {
     id: "languages",
-    label: "Diller",
+    label: "Languages",
     categories: [
       {
         id: "spoken",
-        label: "Konuşulan Diller",
+        label: "Spoken Languages",
         items: [
-          { kind: "lang", name: "Türkçe", level: "Anadil" },
-          { kind: "lang", name: "İngilizce", level: "B2" },
+          { kind: "lang", name: "Turkish", level: "Native" },
+          { kind: "lang", name: "English", level: "B2"     },
+          { kind: "lang", name: "Dutch",   level: "A1"     },
         ],
       },
     ],
   },
   {
     id: "interests",
-    label: "İlgi Alanları",
+    label: "Interests",
     categories: [
       {
         id: "hobbies",
-        label: "Hobiler",
+        label: "Hobbies",
         items: [
-          { kind: "interest", name: "Satranç" },
-          { kind: "interest", name: "Müzik" },
-          { kind: "interest", name: "Fotoğrafçılık" },
+          { kind: "interest", name: "Chess" },
+          { kind: "interest", name: "Table Tennis" },
+          { kind: "interest", name: "Open Source Exploration" },
         ],
       },
     ],

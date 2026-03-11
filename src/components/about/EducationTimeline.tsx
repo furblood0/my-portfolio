@@ -56,9 +56,19 @@ export function EducationTimeline({ items }: Props) {
                 )}
               </div>
 
-              <p className="mt-0.5 font-mono text-[11px] tracking-[0.06em] text-slate-500">
-                {item.school}
-              </p>
+              <div className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-0.5">
+                <p className="font-mono text-[11px] tracking-[0.06em] text-slate-500">
+                  {item.school}
+                </p>
+                {item.location && (
+                  <>
+                    <span aria-hidden className="font-mono text-[11px] text-slate-700">·</span>
+                    <p className="font-mono text-[11px] tracking-[0.06em] text-slate-600">
+                      {item.location}
+                    </p>
+                  </>
+                )}
+              </div>
 
               {item.description && (
                 <p className="mt-2.5 text-sm leading-relaxed text-slate-400">

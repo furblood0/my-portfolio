@@ -88,7 +88,7 @@ export function ContactPanel() {
           </label>
           <input
             type="text"
-            placeholder="Adın"
+            placeholder="Your name"
             className="rounded-lg border border-slate-700/60 bg-slate-900/60 px-3 py-2 font-mono text-sm text-slate-200 placeholder-slate-700 outline-none transition-colors focus:border-cyan-700/60 focus:ring-1 focus:ring-cyan-900/50"
           />
         </div>
@@ -108,7 +108,7 @@ export function ContactPanel() {
           </label>
           <textarea
             rows={4}
-            placeholder="Mesajın..."
+            placeholder="Your message..."
             className="resize-none rounded-lg border border-slate-700/60 bg-slate-900/60 px-3 py-2 font-mono text-sm text-slate-200 placeholder-slate-700 outline-none transition-colors focus:border-cyan-700/60 focus:ring-1 focus:ring-cyan-900/50"
           />
         </div>

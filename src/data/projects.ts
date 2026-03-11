@@ -3,7 +3,7 @@ export type Project = {
   title: string;
   description: string;
   tags: string[];
-  image?: string;  // "/previews/project-id.png" — public/ klasöründen
+  image?: string;  // "/previews/project-id.png" — served from public/
   year?: string;   // "2024"
   github?: string;
   live?: string;
@@ -14,35 +14,34 @@ export const PROJECTS: Project[] = [
     id: "portfolio",
     title: "The Kinetic Blueprint",
     description:
-      "Kişisel portfolyo sitesi. Sci-fi şematik estetiğine sahip, Framer Motion ile animasyonlu interaktif ana ekran.",
+      "Personal portfolio site with a sci-fi schematic aesthetic. Features an interactive main canvas built with Framer Motion animations and a sliding panel system.",
     tags: ["Next.js", "TypeScript", "Framer Motion", "Tailwind CSS"],
+    year: "2024",
     image: "/previews/portfolio.png",
     github: "https://github.com/furkan",
     live: "/",
   },
   {
     id: "project-2",
-    title: "Proje Adı",
+    title: "Project Name",
     description:
-      "Kısa proje açıklaması. Projenin ne yaptığını, hangi problemi çözdüğünü anlatan birkaç cümle.",
+      "Short project description. A few sentences explaining what the project does and what problem it solves.",
     tags: ["React", "Node.js", "PostgreSQL"],
-    image: "/previews/portfolio.jpg",
     github: "https://github.com/furkan",
   },
   {
     id: "project-3",
-    title: "Proje Adı",
+    title: "Project Name",
     description:
-      "Kısa proje açıklaması. Projenin ne yaptığını, hangi problemi çözdüğünü anlatan birkaç cümle.",
+      "Short project description. A few sentences explaining what the project does and what problem it solves.",
     tags: ["TypeScript", "Express", "MongoDB"],
     github: "https://github.com/furkan",
-    live: "#",
   },
   {
     id: "project-4",
-    title: "Proje Adı",
+    title: "Project Name",
     description:
-      "Kısa proje açıklaması. Projenin ne yaptığını, hangi problemi çözdüğünü anlatan birkaç cümle.",
+      "Short project description. A few sentences explaining what the project does and what problem it solves.",
     tags: ["Python", "FastAPI", "Docker"],
     github: "https://github.com/furkan",
   },
