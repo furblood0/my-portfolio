@@ -82,7 +82,7 @@ export function PowerCore({
             exit={{ opacity: 0, y: 4 }}
             transition={{ duration: 0.2 }}
           >
-            Sistemi Baslat // Initialize System
+            Initialize System
           </motion.div>
         )}
       </AnimatePresence>

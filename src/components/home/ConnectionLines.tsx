@@ -7,9 +7,10 @@ type Props = {
   vp: { w: number; h: number };
   modules: ComputedModule[];
   isSystemOn: boolean;
+  activeModuleId: string | null;
 };
 
-export function ConnectionLines({ vp, modules, isSystemOn }: Props) {
+export function ConnectionLines({ vp, modules, isSystemOn, activeModuleId }: Props) {
   const coreX = vp.w * 0.5;
   const coreY = vp.h * 0.5;
 
@@ -92,6 +93,30 @@ export function ConnectionLines({ vp, modules, isSystemOn }: Props) {
             >
               <animateMotion dur={module.flow} repeatCount="indefinite" path={curve.path} />
             </motion.circle>
+
+            {/* Fast pulse dots when this module is active */}
+            {activeModuleId === module.id && (
+              <>
+                <motion.circle
+                  r="2.8"
+                  fill="#22d3ee"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: [0.6, 1, 0.6] }}
+                  transition={{ duration: 0.7, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <animateMotion dur="1.3s" repeatCount="indefinite" path={curve.path} />
+                </motion.circle>
+                <motion.circle
+                  r="2.0"
+                  fill="#67e8f9"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: [0.4, 0.9, 0.4] }}
+                  transition={{ duration: 0.7, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
+                >
+                  <animateMotion dur="1.0s" repeatCount="indefinite" path={curve.path} />
+                </motion.circle>
+              </>
+            )}
           </g>
         );
       })}

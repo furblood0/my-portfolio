@@ -13,7 +13,7 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "The Kinetic Blueprint | Furkan",
+  title: "Furblood",
   description: "Engineering schematic inspired portfolio experience.",
 };
 

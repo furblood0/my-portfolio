@@ -27,3 +27,34 @@ body {
 .energy-pulse {
   opacity: 0.9;
 }
+
+/* ── Custom scrollbar ── */
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #334155 #0f172a;
+}
+
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #22d3ee40;
+}
+
+::-webkit-scrollbar-corner {
+  background: #0f172a;
+}
