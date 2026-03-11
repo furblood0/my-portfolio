@@ -1,45 +1,108 @@
-export type SkillItem = {
-  name: string;
-  level: number; // 0–100
-};
+export type TechLevel = "uzman" | "iyi" | "orta" | "başlangıç";
+export type LangLevel = "Anadil" | "C2" | "C1" | "B2" | "B1" | "A2" | "A1";
+
+export type SkillItem =
+  | { kind: "tech";     name: string; level: TechLevel }
+  | { kind: "lang";     name: string; level: LangLevel; note?: string }
+  | { kind: "interest"; name: string; note?: string }
+  | { kind: "method";   name: string; note?: string };
 
 export type SkillCategory = {
   id: string;
-  category: string;
+  label: string;
   items: SkillItem[];
 };
 
-export const SKILLS: SkillCategory[] = [
+export type SkillGroup = {
+  id: string;
+  label: string;
+  categories: SkillCategory[];
+};
+
+export const SKILL_GROUPS: SkillGroup[] = [
   {
-    id: "frontend",
-    category: "Frontend",
-    items: [
-      { name: "React / Next.js", level: 90 },
-      { name: "TypeScript", level: 85 },
-      { name: "Tailwind CSS", level: 88 },
-      { name: "Framer Motion", level: 80 },
-      { name: "HTML / CSS", level: 95 },
+    id: "technical",
+    label: "Teknik",
+    categories: [
+      {
+        id: "frontend",
+        label: "Frontend",
+        items: [
+          { kind: "tech", name: "React / Next.js",  level: "uzman"      },
+          { kind: "tech", name: "TypeScript",        level: "iyi"        },
+          { kind: "tech", name: "Tailwind CSS",      level: "uzman"      },
+          { kind: "tech", name: "Framer Motion",     level: "iyi"        },
+          { kind: "tech", name: "HTML / CSS",        level: "uzman"      },
+        ],
+      },
+      {
+        id: "backend",
+        label: "Backend",
+        items: [
+          { kind: "tech", name: "Node.js",       level: "iyi"        },
+          { kind: "tech", name: "Express",       level: "iyi"        },
+          { kind: "tech", name: "Python",        level: "orta"       },
+          { kind: "tech", name: "PostgreSQL",    level: "orta"       },
+          { kind: "tech", name: "MongoDB",       level: "orta"       },
+        ],
+      },
+      {
+        id: "tools",
+        label: "Tools & DevOps",
+        items: [
+          { kind: "tech", name: "Git / GitHub",    level: "uzman"    },
+          { kind: "tech", name: "Docker",          level: "başlangıç" },
+          { kind: "tech", name: "Figma",           level: "orta"     },
+          { kind: "tech", name: "VS Code / Cursor",level: "uzman"    },
+        ],
+      },
     ],
   },
   {
-    id: "backend",
-    category: "Backend",
-    items: [
-      { name: "Node.js", level: 80 },
-      { name: "Express", level: 75 },
-      { name: "Python", level: 70 },
-      { name: "PostgreSQL", level: 72 },
-      { name: "MongoDB", level: 68 },
+    id: "methodology",
+    label: "Metodoloji",
+    categories: [
+      {
+        id: "practices",
+        label: "Çalışma Pratikleri",
+        items: [
+          { kind: "method", name: "Agile / Scrum" },
+          { kind: "method", name: "Clean Code" },
+          { kind: "method", name: "Component-Driven Development" },
+          { kind: "method", name: "REST API Tasarımı" },
+          { kind: "method", name: "Code Review" },
+          { kind: "method", name: "Responsive Design" },
+        ],
+      },
     ],
   },
   {
-    id: "tools",
-    category: "Tools & DevOps",
-    items: [
-      { name: "Git / GitHub", level: 90 },
-      { name: "Docker", level: 65 },
-      { name: "Figma", level: 70 },
-      { name: "VS Code / Cursor", level: 95 },
+    id: "languages",
+    label: "Diller",
+    categories: [
+      {
+        id: "spoken",
+        label: "Konuşulan Diller",
+        items: [
+          { kind: "lang", name: "Türkçe", level: "Anadil" },
+          { kind: "lang", name: "İngilizce", level: "B2" },
+        ],
+      },
+    ],
+  },
+  {
+    id: "interests",
+    label: "İlgi Alanları",
+    categories: [
+      {
+        id: "hobbies",
+        label: "Hobiler",
+        items: [
+          { kind: "interest", name: "Satranç" },
+          { kind: "interest", name: "Müzik" },
+          { kind: "interest", name: "Fotoğrafçılık" },
+        ],
+      },
     ],
   },
 ];
