@@ -84,6 +84,15 @@ export default function Home() {
     setActiveModule((prev) => (prev === id ? null : id));
   };
 
+  // ESC key closes the active panel
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setActiveModule(null);
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, []);
+
   return (
     <main
       className="relative h-screen w-screen overflow-hidden bg-slate-950 text-slate-100"

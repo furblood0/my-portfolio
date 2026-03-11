@@ -1,6 +1,7 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { useRef } from "react";
+import { motion } from "framer-motion";
 
 type Props = {
   side: "left" | "right";
@@ -10,8 +11,23 @@ type Props = {
   children: React.ReactNode;
 };
 
+const SWIPE_THRESHOLD = 80;
+
 export function PanelContainer({ side, title, panelWidth, onClose, children }: Props) {
   const isLeft = side === "left";
+  const touchStartX = useRef<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const deltaX = e.changedTouches[0].clientX - touchStartX.current;
+    if (isLeft && deltaX < -SWIPE_THRESHOLD) onClose();
+    if (!isLeft && deltaX > SWIPE_THRESHOLD) onClose();
+    touchStartX.current = null;
+  };
 
   return (
     <motion.aside
@@ -25,6 +41,8 @@ export function PanelContainer({ side, title, panelWidth, onClose, children }: P
       animate={{ x: 0, opacity: 1 }}
       exit={{ x: isLeft ? -panelWidth : panelWidth, opacity: 0 }}
       transition={{ type: "spring", stiffness: 110, damping: 22, mass: 0.8 }}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
     >
       {/* Faint grid overlay */}
       <div aria-hidden className="blueprint-grid pointer-events-none absolute inset-0 opacity-[0.06]" />

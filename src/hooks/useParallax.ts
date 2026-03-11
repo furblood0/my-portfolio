@@ -16,6 +16,8 @@ export function useParallax() {
   const sceneY = useTransform(springY, [-0.5, 0.5], [-22, 22]);
 
   const handleMouseMove = (event: MouseEvent<HTMLElement>) => {
+    // Skip parallax on touch devices — pointer: coarse means finger/stylus
+    if (window.matchMedia("(pointer: coarse)").matches) return;
     const { left, top, width, height } = event.currentTarget.getBoundingClientRect();
     rawX.set((event.clientX - left) / width - 0.5);
     rawY.set((event.clientY - top) / height - 0.5);
