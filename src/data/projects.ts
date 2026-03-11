@@ -3,6 +3,8 @@ export type Project = {
   title: string;
   description: string;
   tags: string[];
+  image?: string;  // "/previews/project-id.png" — public/ klasöründen
+  year?: string;   // "2024"
   github?: string;
   live?: string;
 };
@@ -14,6 +16,7 @@ export const PROJECTS: Project[] = [
     description:
       "Kişisel portfolyo sitesi. Sci-fi şematik estetiğine sahip, Framer Motion ile animasyonlu interaktif ana ekran.",
     tags: ["Next.js", "TypeScript", "Framer Motion", "Tailwind CSS"],
+    image: "/previews/portfolio.png",
     github: "https://github.com/furkan",
     live: "/",
   },
@@ -23,6 +26,7 @@ export const PROJECTS: Project[] = [
     description:
       "Kısa proje açıklaması. Projenin ne yaptığını, hangi problemi çözdüğünü anlatan birkaç cümle.",
     tags: ["React", "Node.js", "PostgreSQL"],
+    image: "/previews/portfolio.jpg",
     github: "https://github.com/furkan",
   },
   {
