@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { CONTACT_LINKS, type ContactLink } from "@/data/contact";
+import { sendContactEmail } from "@/app/actions/contact";
 
 function GithubIcon() {
   return (
@@ -35,6 +37,41 @@ function ContactIcon({ icon }: { icon: ContactLink["icon"] }) {
 }
 
 export function ContactPanel() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setErrorMsg("");
+
+    const trimmedName = name.trim();
+    const trimmedEmail = email.trim();
+    const trimmedMessage = message.trim();
+
+    if (!trimmedName || !trimmedEmail || !trimmedMessage) {
+      setStatus("error");
+      setErrorMsg("All fields are required.");
+      return;
+    }
+
+    setStatus("loading");
+
+    const result = await sendContactEmail(trimmedName, trimmedEmail, trimmedMessage);
+
+    if (result.ok) {
+      setStatus("success");
+      setName("");
+      setEmail("");
+      setMessage("");
+    } else {
+      setStatus("error");
+      setErrorMsg(result.error);
+    }
+  }
+
   return (
     <div className="flex flex-col gap-6">
       {/* Contact link cards */}
@@ -78,45 +115,66 @@ export function ContactPanel() {
       </div>
 
       {/* Contact form */}
-      <form
-        className="flex flex-col gap-4"
-        onSubmit={(e) => e.preventDefault()}
-      >
+      <form className="flex flex-col gap-4" onSubmit={handleSubmit} noValidate>
         <div className="flex flex-col gap-1.5">
-          <label className="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500">
+          <label htmlFor="contact-name" className="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500">
             Name
           </label>
           <input
+            id="contact-name"
             type="text"
+            name="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             placeholder="Your name"
-            className="rounded-lg border border-slate-700/60 bg-slate-900/60 px-3 py-2 font-mono text-sm text-slate-200 placeholder-slate-700 outline-none transition-colors focus:border-cyan-700/60 focus:ring-1 focus:ring-cyan-900/50"
+            disabled={status === "loading"}
+            className="rounded-lg border border-slate-700/60 bg-slate-900/60 px-3 py-2 font-mono text-sm text-slate-200 placeholder-slate-700 outline-none transition-colors focus:border-cyan-700/60 focus:ring-1 focus:ring-cyan-900/50 disabled:opacity-60"
           />
         </div>
         <div className="flex flex-col gap-1.5">
-          <label className="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500">
+          <label htmlFor="contact-email" className="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500">
             Email
           </label>
           <input
+            id="contact-email"
             type="email"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="email@example.com"
-            className="rounded-lg border border-slate-700/60 bg-slate-900/60 px-3 py-2 font-mono text-sm text-slate-200 placeholder-slate-700 outline-none transition-colors focus:border-cyan-700/60 focus:ring-1 focus:ring-cyan-900/50"
+            disabled={status === "loading"}
+            className="rounded-lg border border-slate-700/60 bg-slate-900/60 px-3 py-2 font-mono text-sm text-slate-200 placeholder-slate-700 outline-none transition-colors focus:border-cyan-700/60 focus:ring-1 focus:ring-cyan-900/50 disabled:opacity-60"
           />
         </div>
         <div className="flex flex-col gap-1.5">
-          <label className="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500">
+          <label htmlFor="contact-message" className="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500">
             Message
           </label>
           <textarea
+            id="contact-message"
+            name="message"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
             rows={4}
             placeholder="Your message..."
-            className="resize-none rounded-lg border border-slate-700/60 bg-slate-900/60 px-3 py-2 font-mono text-sm text-slate-200 placeholder-slate-700 outline-none transition-colors focus:border-cyan-700/60 focus:ring-1 focus:ring-cyan-900/50"
+            disabled={status === "loading"}
+            className="resize-none rounded-lg border border-slate-700/60 bg-slate-900/60 px-3 py-2 font-mono text-sm text-slate-200 placeholder-slate-700 outline-none transition-colors focus:border-cyan-700/60 focus:ring-1 focus:ring-cyan-900/50 disabled:opacity-60"
           />
         </div>
+
+        {status === "error" && (
+          <p className="font-mono text-xs text-red-400">{errorMsg}</p>
+        )}
+        {status === "success" && (
+          <p className="font-mono text-xs text-cyan-400">Message sent. I&apos;ll get back to you soon.</p>
+        )}
+
         <button
           type="submit"
-          className="self-start rounded-lg border border-slate-600/60 bg-slate-900/80 px-6 py-2 font-mono text-sm tracking-[0.14em] text-slate-300 transition-colors hover:border-cyan-600/60 hover:text-cyan-300"
+          disabled={status === "loading"}
+          className="self-start rounded-lg border border-slate-600/60 bg-slate-900/80 px-6 py-2 font-mono text-sm tracking-[0.14em] text-slate-300 transition-colors hover:border-cyan-600/60 hover:text-cyan-300 disabled:opacity-60 disabled:cursor-not-allowed"
         >
-          Send //
+          {status === "loading" ? "Sending..." : "Send //"}
         </button>
       </form>
     </div>
