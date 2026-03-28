@@ -95,11 +95,13 @@ export function ProjectCard({
           </div>
         </div>
 
-        {/* Index + chevron */}
+        {/* Year + chevron */}
         <div className="flex shrink-0 flex-col items-end gap-2 pt-0.5">
-          <span className="font-mono text-[10px] tracking-[0.2em] text-slate-700">
-            {String(index + 1).padStart(2, "0")}
-          </span>
+          {project.year && (
+            <span className="font-mono text-[9px] tracking-[0.15em] text-slate-700">
+              {project.year}
+            </span>
+          )}
           <button
             type="button"
             aria-label={isExpanded ? "Kart'ı kapat" : "Kart'ı genişlet"}
