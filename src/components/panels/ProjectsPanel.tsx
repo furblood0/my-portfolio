@@ -14,6 +14,8 @@ const CATEGORY_LABELS: Record<FilterCategory, string> = {
   backend: "BACKEND",
   mobile: "MOBILE",
   tool: "TOOL",
+  game: "GAME",
+  desktop: "DESKTOP",
 };
 
 export function ProjectsPanel() {
