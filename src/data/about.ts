@@ -1,10 +1,3 @@
-export type TimelineItem = {
-  year: string;
-  title: string;
-  place: string;
-  description?: string;
-};
-
 export type ExperienceItem = {
   period: string;
   title: string;

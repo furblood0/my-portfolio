@@ -52,7 +52,7 @@ export function PanelContainer({ side, title, panelWidth, onClose, children }: P
         <div className="flex items-center gap-3">
           <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" aria-hidden />
           <span className="font-mono text-[11px] uppercase tracking-[0.28em] text-cyan-400/90">
-            {title} //
+            {`${title} //`}
           </span>
         </div>
         <button

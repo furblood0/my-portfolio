@@ -3,7 +3,7 @@ export type ContactLink = {
   label: string;
   value: string;
   href: string;
-  icon: "github" | "linkedin" | "email" | "twitter";
+  icon: "github" | "linkedin" | "email";
 };
 
 export const CONTACT_LINKS: ContactLink[] = [
