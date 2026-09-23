@@ -32,7 +32,7 @@ What each file in this repo does. Content lives in `src/data/`; the home canvas 
 | [layout.tsx](src/app/layout.tsx) | Root HTML, fonts (Space Grotesk, JetBrains Mono), page title. |
 | [page.tsx](src/app/page.tsx) | Home canvas: boot scene, module buttons, hash sync, panel open/close. |
 | [globals.css](src/app/globals.css) | Theme tokens, blueprint grid, scrollbar. |
-| [actions/contact.ts](src/app/actions/contact.ts) | Server action that sends the contact form via Resend. |
+| [actions/contact.ts](src/app/actions/contact.ts) | Server action: validate, honeypot, rate limit, send via Resend. |
 
 ## Data — `src/data`
 
@@ -51,6 +51,7 @@ Static typed content. Change these to update the site; no CMS.
 |---|---|
 | [modules.ts](src/lib/modules.ts) | The four module positions, curve math, boot stagger. |
 | [hash.ts](src/lib/hash.ts) | Parse `#projects` / `#skills` / `#about` / `#contact` and build URLs. |
+| [contact.ts](src/lib/contact.ts) | Shared contact field limits and validation. |
 | [useViewport.ts](src/hooks/useViewport.ts) | Window width/height for placing modules. |
 | [useParallax.ts](src/hooks/useParallax.ts) | Mouse parallax; skipped on coarse pointers (touch). |
 

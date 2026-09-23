@@ -19,7 +19,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Contact form
 
-The contact panel sends mail through a server action. Set `RESEND_API_KEY` in `.env.local` for that to work.
+The contact panel sends mail through a server action. Copy `.env.example` to `.env.local` and set `RESEND_API_KEY`. `CONTACT_TO` defaults to the Gmail in `src/data/contact.ts`.
 
 ## Scripts
 

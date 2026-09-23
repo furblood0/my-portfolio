@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { CONTACT_LINKS, type ContactLink } from "@/data/contact";
 import { sendContactEmail } from "@/app/actions/contact";
+import { CONTACT_LIMITS, validateContact } from "@/lib/contact";
 
 function GithubIcon() {
   return (
@@ -40,6 +41,7 @@ export function ContactPanel() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [company, setCompany] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -47,25 +49,24 @@ export function ContactPanel() {
     e.preventDefault();
     setErrorMsg("");
 
-    const trimmedName = name.trim();
-    const trimmedEmail = email.trim();
-    const trimmedMessage = message.trim();
-
-    if (!trimmedName || !trimmedEmail || !trimmedMessage) {
+    const payload = { name, email, message };
+    const invalid = validateContact(payload);
+    if (invalid) {
       setStatus("error");
-      setErrorMsg("All fields are required.");
+      setErrorMsg(invalid);
       return;
     }
 
     setStatus("loading");
 
-    const result = await sendContactEmail(trimmedName, trimmedEmail, trimmedMessage);
+    const result = await sendContactEmail({ ...payload, company });
 
     if (result.ok) {
       setStatus("success");
       setName("");
       setEmail("");
       setMessage("");
+      setCompany("");
     } else {
       setStatus("error");
       setErrorMsg(result.error);
@@ -115,7 +116,19 @@ export function ContactPanel() {
       </div>
 
       {/* Contact form */}
-      <form className="flex flex-col gap-4" onSubmit={handleSubmit} noValidate>
+      <form className="relative flex flex-col gap-4" onSubmit={handleSubmit} noValidate>
+        <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden>
+          <label htmlFor="contact-company">Company</label>
+          <input
+            id="contact-company"
+            type="text"
+            name="company"
+            tabIndex={-1}
+            autoComplete="off"
+            value={company}
+            onChange={(e) => setCompany(e.target.value)}
+          />
+        </div>
         <div className="flex flex-col gap-1.5">
           <label htmlFor="contact-name" className="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500">
             Name
@@ -127,6 +140,7 @@ export function ContactPanel() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Your name"
+            maxLength={CONTACT_LIMITS.name}
             disabled={status === "loading"}
             className="rounded-lg border border-slate-700/60 bg-slate-900/60 px-3 py-2 font-mono text-sm text-slate-200 placeholder-slate-700 outline-none transition-colors focus:border-cyan-700/60 focus:ring-1 focus:ring-cyan-900/50 disabled:opacity-60"
           />
@@ -142,6 +156,7 @@ export function ContactPanel() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="email@example.com"
+            maxLength={CONTACT_LIMITS.email}
             disabled={status === "loading"}
             className="rounded-lg border border-slate-700/60 bg-slate-900/60 px-3 py-2 font-mono text-sm text-slate-200 placeholder-slate-700 outline-none transition-colors focus:border-cyan-700/60 focus:ring-1 focus:ring-cyan-900/50 disabled:opacity-60"
           />
@@ -157,17 +172,22 @@ export function ContactPanel() {
             onChange={(e) => setMessage(e.target.value)}
             rows={4}
             placeholder="Your message..."
+            maxLength={CONTACT_LIMITS.message}
             disabled={status === "loading"}
             className="resize-none rounded-lg border border-slate-700/60 bg-slate-900/60 px-3 py-2 font-mono text-sm text-slate-200 placeholder-slate-700 outline-none transition-colors focus:border-cyan-700/60 focus:ring-1 focus:ring-cyan-900/50 disabled:opacity-60"
           />
         </div>
 
-        {status === "error" && (
-          <p className="font-mono text-xs text-red-400">{errorMsg}</p>
-        )}
-        {status === "success" && (
-          <p className="font-mono text-xs text-cyan-400">Message sent. I&apos;ll get back to you soon.</p>
-        )}
+        <div aria-live="polite" aria-atomic="true">
+          {status === "error" && (
+            <p className="font-mono text-xs text-red-400">{errorMsg}</p>
+          )}
+          {status === "success" && (
+            <p className="font-mono text-xs text-cyan-400">
+              Message sent. I&apos;ll reply to the email you entered.
+            </p>
+          )}
+        </div>
 
         <button
           type="submit"

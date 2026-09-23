@@ -7,6 +7,37 @@ type Props = {
   items: ExperienceItem[];
 };
 
+function ExperienceDescription({
+  description,
+}: {
+  description: string | string[];
+}) {
+  if (Array.isArray(description)) {
+    return (
+      <ul className="mt-2.5 flex flex-col gap-1.5">
+        {description.map((point, i) => (
+          <li
+            key={i}
+            className="flex gap-2.5 text-sm leading-relaxed text-slate-400"
+          >
+            <span
+              aria-hidden
+              className="mt-[8px] h-1.5 w-1.5 shrink-0 rotate-45 border border-cyan-500/55 bg-cyan-500/15"
+            />
+            <span>{point}</span>
+          </li>
+        ))}
+      </ul>
+    );
+  }
+
+  return (
+    <p className="mt-2.5 text-sm leading-relaxed text-slate-400">
+      {description}
+    </p>
+  );
+}
+
 export function ExperienceTimeline({ items }: Props) {
   return (
     <div className="relative pl-7">
@@ -64,9 +95,7 @@ export function ExperienceTimeline({ items }: Props) {
                 )}
               </div>
               {item.description && (
-                <p className="mt-2.5 text-sm leading-relaxed text-slate-400">
-                  {item.description}
-                </p>
+                <ExperienceDescription description={item.description} />
               )}
             </div>
           </motion.li>

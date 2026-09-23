@@ -15,13 +15,38 @@ export type Project = {
 
 export const PROJECTS: Project[] = [
   {
+    id: "servis-takip-sistemi",
+    title: "Servis Takip Sistemi",
+    description:
+      "Engineered a cross-platform (Web & Android) fleet tracking application featuring live telemetry (speed, duration, remaining distance), poor-signal handling, and an automated trip completion mechanism using geofencing.",
+    tags: ["Flutter", "Dart", "OpenStreetMap", "Geofencing", "REST API"],
+    category: "mobile",
+    featured: true,
+    image: "",
+    year: "2026",
+    live: "https://kbm-servis-takip.web.app/",
+    github: "",
+  },
+  {
+    id: "movie-tracker",
+    title: "Movie Tracker",
+    description:
+      "Built a self-hosted movie and TV show tracking journal, architecting a full-stack media platform with zero external npm dependencies, leveraging native Node.js HTTP/crypto modules and node:sqlite with schema migrations, prepared statements, and custom rate limiting.",
+    tags: ["Vanilla JavaScript", "Node.js/node:http", "TMDb API", "SQLite", "CSS3"],
+    category: "web",
+    featured: false,
+    image: "",
+    year: "2026",
+    github: "https://github.com/furblood0/movie-tracker",
+  },
+  {
     id: "myblog",
     title: "MyBlog",
     description:
       "A full-stack blog platform with JWT authentication, post management with a draft/published workflow, and a dark distraction-free editor with live preview. Cover images can be uploaded or linked externally. Backed by PostgreSQL running in Docker, served via a Node.js/Express REST API.",
     tags: ["React", "Node.js", "Express.js", "PostgreSQL", "Docker", "JWT"],
     category: "web",
-    featured: true,
+    featured: false,
     image: "https://raw.githubusercontent.com/furblood0/MyBlogProject/main/project1/public/dashboard.png",
     year: "2025",
     github: "https://github.com/furblood0/MyBlogProject",
