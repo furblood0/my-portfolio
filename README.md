@@ -2,6 +2,8 @@
 
 Schematic, single-page portfolio: a power core on the home canvas opens Projects, Skills, About, and Contact panels.
 
+What each file does: [FILES.md](FILES.md).
+
 ## Stack
 
 Next.js 16, React 19, TypeScript, Tailwind CSS 4, Framer Motion, Resend.

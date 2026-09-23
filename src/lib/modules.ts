@@ -55,6 +55,11 @@ export const MODULES_DEF: ModuleDef[] = [
   },
 ];
 
+/** Stagger for boot lines and module buttons — last item lands around 1s. */
+export function getRouteDelay(index: number): number {
+  return 0.08 + index * 0.12;
+}
+
 export function computeModules(vp: { w: number; h: number }): ComputedModule[] {
   return MODULES_DEF.map((m) => ({
     ...m,

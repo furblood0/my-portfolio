@@ -6,6 +6,7 @@ import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from
 import { useViewport } from "@/hooks/useViewport";
 import { useParallax } from "@/hooks/useParallax";
 import { computeModules, MODULES_DEF } from "@/lib/modules";
+import { moduleUrl, parseModuleHash } from "@/lib/hash";
 
 import { BlueprintGrid } from "@/components/home/BlueprintGrid";
 import { ConnectionLines } from "@/components/home/ConnectionLines";
@@ -23,9 +24,7 @@ export default function Home() {
   const vp = useViewport();
   const { gridX, gridY, sceneX, sceneY, handleMouseMove, handleMouseLeave } = useParallax();
 
-  const [isSystemOn, setIsSystemOn] = useState(false);
   const [isCoreHovered, setIsCoreHovered] = useState(false);
-  const [rippleTick, setRippleTick] = useState(0);
   const [activeModule, setActiveModule] = useState<string | null>(null);
 
   const vpReady = vp.w > 0;
@@ -69,29 +68,45 @@ export default function Home() {
   const activeMod = MODULES_DEF.find((m) => m.id === activeModule);
   const panelSide = activeMod ? (activeMod.fx < 0.5 ? "left" : "right") : null;
 
-  const toggleSystem = () => {
-    setIsSystemOn((prev) => {
-      if (!prev) {
-        setRippleTick((v) => v + 1);
-      } else {
-        setActiveModule(null);
-      }
-      return !prev;
-    });
+  const syncModule = (id: string | null) => {
+    setActiveModule(id);
+    const next = moduleUrl(id);
+    const current = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+    if (current !== next) {
+      window.history.pushState(null, "", next);
+    }
   };
+
+  useEffect(() => {
+    const applyHash = () => {
+      setActiveModule(parseModuleHash(window.location.hash));
+    };
+
+    const frame = requestAnimationFrame(applyHash);
+    window.addEventListener("hashchange", applyHash);
+    window.addEventListener("popstate", applyHash);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("hashchange", applyHash);
+      window.removeEventListener("popstate", applyHash);
+    };
+  }, []);
 
   const handleModuleToggle = (id: string) => {
-    setActiveModule((prev) => (prev === id ? null : id));
+    syncModule(activeModule === id ? null : id);
   };
 
-  // ESC key closes the active panel
+  const handleCoreClick = () => {
+    syncModule(activeModule === "about" ? null : "about");
+  };
+
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setActiveModule(null);
+      if (e.key === "Escape") syncModule(null);
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, []);
+  }, [activeModule]);
 
   return (
     <main
@@ -99,7 +114,7 @@ export default function Home() {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      <BlueprintGrid isSystemOn={isSystemOn} gridX={gridX} gridY={gridY} />
+      <BlueprintGrid gridX={gridX} gridY={gridY} />
 
       {/* Side panels — rendered outside the scene so they don't shift with it */}
       <AnimatePresence>
@@ -108,7 +123,7 @@ export default function Home() {
             side={panelSide}
             title={activeMod.label}
             panelWidth={panelWidth}
-            onClose={() => setActiveModule(null)}
+            onClose={() => syncModule(null)}
           >
             {activeModule === "projects" && <ProjectsPanel />}
             {activeModule === "skills" && <SkillsPanel />}
@@ -123,24 +138,21 @@ export default function Home() {
         style={{ x: totalSceneX, y: sceneY }}
       >
         <div className="relative h-full w-full">
-
           {vpReady && (
             <ConnectionLines
               vp={vp}
               modules={modules}
-              isSystemOn={isSystemOn}
               activeModuleId={activeModule}
             />
           )}
 
-          <CoreRings isSystemOn={isSystemOn} />
+          <CoreRings />
 
-          <BootRipple isSystemOn={isSystemOn} rippleTick={rippleTick} />
+          <BootRipple />
 
           <PowerCore
-            isSystemOn={isSystemOn}
             isCoreHovered={isCoreHovered}
-            onToggle={toggleSystem}
+            onOpenAbout={handleCoreClick}
             onHoverStart={() => setIsCoreHovered(true)}
             onHoverEnd={() => setIsCoreHovered(false)}
           />
@@ -150,13 +162,10 @@ export default function Home() {
               key={module.id}
               module={module}
               index={index}
-              isSystemOn={isSystemOn}
               isActive={activeModule === module.id}
               onToggle={handleModuleToggle}
             />
           ))}
-
-
         </div>
       </motion.section>
     </main>

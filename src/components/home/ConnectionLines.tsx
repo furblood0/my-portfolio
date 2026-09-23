@@ -1,16 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { type ComputedModule, getCurveData } from "@/lib/modules";
+import { getCurveData, getRouteDelay, type ComputedModule } from "@/lib/modules";
 
 type Props = {
   vp: { w: number; h: number };
   modules: ComputedModule[];
-  isSystemOn: boolean;
   activeModuleId: string | null;
 };
 
-export function ConnectionLines({ vp, modules, isSystemOn, activeModuleId }: Props) {
+export function ConnectionLines({ vp, modules, activeModuleId }: Props) {
   const coreX = vp.w * 0.5;
   const coreY = vp.h * 0.5;
 
@@ -19,11 +18,10 @@ export function ConnectionLines({ vp, modules, isSystemOn, activeModuleId }: Pro
       aria-hidden
       viewBox={`0 0 ${vp.w} ${vp.h}`}
       className="pointer-events-none absolute inset-0 h-full w-full"
-      style={{ opacity: isSystemOn ? 1 : 0 }}
     >
       {modules.map((module, index) => {
         const curve = getCurveData(module, coreX, coreY);
-        const routeDelay = 0.28 + index * 0.62;
+        const routeDelay = getRouteDelay(index);
         return (
           <g key={module.id}>
             <motion.path
@@ -32,13 +30,9 @@ export function ConnectionLines({ vp, modules, isSystemOn, activeModuleId }: Pro
               strokeWidth="1.45"
               strokeDasharray="6 10"
               fill="none"
-              initial={false}
-              animate={{ pathLength: isSystemOn ? 1 : 0, opacity: isSystemOn ? 0.75 : 0 }}
-              transition={
-                isSystemOn
-                  ? { duration: 2.1, ease: "easeInOut", delay: routeDelay }
-                  : { duration: 0.35, ease: "easeOut", delay: (3 - index) * 0.1 }
-              }
+              initial={{ pathLength: 0, opacity: 0 }}
+              animate={{ pathLength: 1, opacity: 0.75 }}
+              transition={{ duration: 0.7, ease: "easeInOut", delay: routeDelay }}
             />
             <motion.path
               d={curve.path}
@@ -46,55 +40,38 @@ export function ConnectionLines({ vp, modules, isSystemOn, activeModuleId }: Pro
               strokeWidth="1.2"
               strokeLinecap="round"
               fill="none"
-              initial={false}
-              animate={{ pathLength: isSystemOn ? 1 : 0, opacity: isSystemOn ? 0.9 : 0 }}
-              transition={
-                isSystemOn
-                  ? { duration: 2.5, ease: "easeInOut", delay: routeDelay + 0.5 }
-                  : { duration: 0.28, ease: "easeOut", delay: (3 - index) * 0.08 }
-              }
+              initial={{ pathLength: 0, opacity: 0 }}
+              animate={{ pathLength: 1, opacity: 0.9 }}
+              transition={{ duration: 0.85, ease: "easeInOut", delay: routeDelay + 0.15 }}
             />
             <motion.circle
               cx={curve.startJx}
               cy={curve.startJy}
               r="1.6"
               fill="#22d3ee"
-              initial={false}
-              animate={{ scale: isSystemOn ? 1 : 0, opacity: isSystemOn ? 0.8 : 0 }}
-              transition={
-                isSystemOn
-                  ? { delay: routeDelay + 0.5, duration: 0.3 }
-                  : { delay: (3 - index) * 0.08, duration: 0.2 }
-              }
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 0.8 }}
+              transition={{ delay: routeDelay + 0.15, duration: 0.25 }}
             />
             <motion.circle
               cx={module.x}
               cy={module.y}
               r="1.9"
               fill="#22d3ee"
-              initial={false}
-              animate={{ scale: isSystemOn ? 1 : 0, opacity: isSystemOn ? 0.92 : 0 }}
-              transition={
-                isSystemOn
-                  ? { delay: routeDelay + 2.0, duration: 0.35 }
-                  : { delay: (3 - index) * 0.1, duration: 0.2 }
-              }
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 0.92 }}
+              transition={{ delay: routeDelay + 0.55, duration: 0.25 }}
             />
             <motion.circle
               r="2.1"
               fill="#22d3ee"
-              initial={false}
-              animate={{ opacity: isSystemOn ? 0.94 : 0 }}
-              transition={
-                isSystemOn
-                  ? { duration: 0.35, delay: routeDelay + 1.3 }
-                  : { duration: 0.2, delay: (3 - index) * 0.1 }
-              }
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.94 }}
+              transition={{ duration: 0.25, delay: routeDelay + 0.4 }}
             >
               <animateMotion dur={module.flow} repeatCount="indefinite" path={curve.path} />
             </motion.circle>
 
-            {/* Fast pulse dots when this module is active */}
             {activeModuleId === module.id && (
               <>
                 <motion.circle

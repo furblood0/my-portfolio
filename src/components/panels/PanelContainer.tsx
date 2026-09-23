@@ -69,12 +69,6 @@ export function PanelContainer({ side, title, panelWidth, onClose, children }: P
       <div className="relative flex-1 overflow-y-auto px-6 py-6">
         {children}
       </div>
-
-      {/* Bottom status strip */}
-      <div
-        aria-hidden
-        className="relative shrink-0 border-t border-slate-800/40 px-6 py-2 font-mono text-[9px] tracking-[0.22em] text-slate-800"
-      />
     </motion.aside>
   );
 }

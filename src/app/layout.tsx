@@ -13,7 +13,7 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Furblood",
+  title: "Furkan Fidan — Software Developer",
   description: "Engineering schematic inspired portfolio experience.",
 };
 
