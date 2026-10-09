@@ -34,6 +34,8 @@ export function ProjectsPanel() {
 
   const featured = filtered.find((p) => p.featured) ?? null;
   const rest = filtered.filter((p) => !p.featured);
+  const selected = rest.filter((p) => !p.archive);
+  const earlier = rest.filter((p) => p.archive);
 
   const handleExpand = (id: string) =>
     setExpandedIds((prev) => new Set(prev).add(id));
@@ -47,13 +49,13 @@ export function ProjectsPanel() {
   return (
     <div className="flex flex-col gap-5">
       {/* Category filter tabs */}
-      <div className="flex gap-0.5 border-b border-slate-800/60">
+      <div className="-mx-1 flex gap-0.5 overflow-x-auto border-b border-slate-800/60">
         {availableCategories.map((cat) => (
           <button
             key={cat}
             type="button"
             onClick={() => setActiveCategory(cat)}
-            className={`-mb-px cursor-pointer border-b-2 px-3 py-2 font-mono text-[10px] tracking-[0.18em] transition-colors duration-200 ${
+            className={`-mb-px shrink-0 cursor-pointer border-b-2 px-2.5 py-2 font-mono text-[10px] tracking-[0.14em] transition-colors duration-200 sm:px-3 sm:tracking-[0.18em] ${
               activeCategory === cat
                 ? "border-cyan-400 text-cyan-400"
                 : "border-transparent text-slate-500 hover:text-slate-300"
@@ -76,15 +78,32 @@ export function ProjectsPanel() {
           {/* Featured project */}
           {featured && <FeaturedProjectCard project={featured} />}
 
-          {/* Rest of projects */}
-          {rest.length > 0 && (
+          {selected.length > 0 && (
             <div className="flex flex-col gap-3">
-              {featured && rest.length > 0 && (
-                <span className="font-mono text-[9px] tracking-[0.22em] text-slate-600 uppercase px-0.5">
-                  Other Projects
+              {featured && (
+                <span className="px-0.5 font-mono text-[9px] uppercase tracking-[0.22em] text-slate-600">
+                  More work
                 </span>
               )}
-              {rest.map((project, index) => (
+              {selected.map((project, index) => (
+                <ProjectCard
+                  key={project.id}
+                  project={project}
+                  index={index}
+                  isExpanded={expandedIds.has(project.id)}
+                  onExpand={handleExpand}
+                  onCollapse={handleCollapse}
+                />
+              ))}
+            </div>
+          )}
+
+          {earlier.length > 0 && (
+            <div className="flex flex-col gap-3">
+              <span className="px-0.5 font-mono text-[9px] uppercase tracking-[0.22em] text-slate-600">
+                Earlier
+              </span>
+              {earlier.map((project, index) => (
                 <ProjectCard
                   key={project.id}
                   project={project}

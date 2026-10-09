@@ -46,7 +46,7 @@ export function EducationTimeline({ items }: Props) {
               </div>
 
               <div className="flex flex-wrap items-baseline gap-2.5">
-                <p className="font-mono text-sm font-semibold tracking-[0.04em] text-slate-100">
+                <p className="text-[15px] font-semibold tracking-tight text-slate-100">
                   {item.department}
                 </p>
                 {item.gpa && (

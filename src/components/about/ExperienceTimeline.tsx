@@ -78,7 +78,7 @@ export function ExperienceTimeline({ items }: Props) {
                 )}
               </div>
 
-              <p className="font-mono text-sm font-semibold tracking-[0.04em] text-slate-100">
+              <p className="text-[15px] font-semibold tracking-tight text-slate-100">
                 {item.title}
               </p>
               <div className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-0.5">

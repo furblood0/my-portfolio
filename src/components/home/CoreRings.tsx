@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 export function CoreRings() {
   return (
     <motion.div
-      className="absolute left-1/2 top-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2"
+      className="absolute left-1/2 top-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2 compact:h-32 compact:w-32"
       initial={{ scale: 0.85, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ duration: 0.4 }}

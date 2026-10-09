@@ -64,6 +64,7 @@ Static typed content. Change these to update the site; no CMS.
 | [CoreRings.tsx](src/components/home/CoreRings.tsx) | Spinning dashed rings around the core. |
 | [BootRipple.tsx](src/components/home/BootRipple.tsx) | One-shot ripple on first paint. |
 | [PowerCore.tsx](src/components/home/PowerCore.tsx) | Center “Furkan” button; opens About. |
+| [SiteChrome.tsx](src/components/home/SiteChrome.tsx) | Name, role, profile links, and proof line on the home canvas. |
 | [ModuleButton.tsx](src/components/home/ModuleButton.tsx) | Positioned Projects / Skills / About / Contact buttons. |
 
 ## Panels — `src/components/panels`
@@ -81,6 +82,7 @@ Static typed content. Change these to update the site; no CMS.
 | File | Role |
 |---|---|
 | [FeaturedProjectCard.tsx](src/components/projects/FeaturedProjectCard.tsx) | Highlight card for the featured project. |
+| [ProjectPreview.tsx](src/components/projects/ProjectPreview.tsx) | Project image, or a composed placeholder when none exists. |
 | [ProjectCard.tsx](src/components/projects/ProjectCard.tsx) | Collapsible project row. |
 | [SkillCategoryCard.tsx](src/components/skills/SkillCategoryCard.tsx) | One skill category accordion. |
 | [ExperienceTimeline.tsx](src/components/about/ExperienceTimeline.tsx) | Work / internship timeline. |

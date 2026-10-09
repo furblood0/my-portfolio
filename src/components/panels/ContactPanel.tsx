@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { ABOUT } from "@/data/about";
 import { CONTACT_LINKS, type ContactLink } from "@/data/contact";
 import { sendContactEmail } from "@/app/actions/contact";
 import { CONTACT_LIMITS, validateContact } from "@/lib/contact";
@@ -75,6 +76,13 @@ export function ContactPanel() {
 
   return (
     <div className="flex flex-col gap-6">
+      <div>
+        <p className="text-[15px] font-medium text-slate-100">{ABOUT.availability}</p>
+        <p className="mt-1.5 text-sm leading-relaxed text-slate-400">
+          Email and LinkedIn both reach me. A short note about the role or the project is enough.
+        </p>
+      </div>
+
       {/* Contact link cards */}
       <div className="flex flex-col gap-3">
         {CONTACT_LINKS.map((link, index) => (
@@ -92,7 +100,7 @@ export function ContactPanel() {
               <ContactIcon icon={link.icon} />
             </span>
             <div className="min-w-0">
-              <p className="font-mono text-sm font-semibold tracking-[0.08em] text-slate-200 transition-colors group-hover:text-cyan-300">
+              <p className="text-sm font-semibold text-slate-200 transition-colors group-hover:text-cyan-300">
                 {link.label}
               </p>
               <p className="truncate font-mono text-[11px] tracking-[0.04em] text-slate-600 transition-colors group-hover:text-slate-400">
@@ -194,7 +202,7 @@ export function ContactPanel() {
           disabled={status === "loading"}
           className="self-start rounded-lg border border-slate-600/60 bg-slate-900/80 px-6 py-2 font-mono text-sm tracking-[0.14em] text-slate-300 transition-colors hover:border-cyan-600/60 hover:text-cyan-300 disabled:opacity-60 disabled:cursor-not-allowed"
         >
-          {status === "loading" ? "Sending..." : "Send //"}
+          {status === "loading" ? "Sending..." : "Send"}
         </button>
       </form>
     </div>

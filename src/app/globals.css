@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@custom-variant compact {
+  @media (max-width: 639px), (max-height: 720px) {
+    @slot;
+  }
+}
+
 @theme inline {
   --font-sans: var(--font-space-grotesk);
   --font-mono: var(--font-jetbrains-mono);

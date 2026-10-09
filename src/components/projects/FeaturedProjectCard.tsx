@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { type Project } from "@/data/projects";
+import { ProjectPreview } from "@/components/projects/ProjectPreview";
 
 function GithubIcon() {
   return (
@@ -55,28 +55,15 @@ export function FeaturedProjectCard({ project }: { project: Project }) {
       </div>
 
       <div className="flex flex-col gap-4 px-5 pb-5 pt-3">
-        {/* Preview image */}
-        {project.image ? (
-          <div className="relative w-full overflow-hidden rounded-lg border border-slate-700/50 aspect-video">
-            <div className="blueprint-grid absolute inset-0 opacity-25" />
-            <Image
-              src={project.image}
-              alt={`${project.title} preview`}
-              fill
-              className="object-contain"
-              sizes="(min-width: 1280px) 512px, (min-width: 1024px) 460px, 100vw"
-            />
-          </div>
-        ) : (
-          <div className="blueprint-grid aspect-video w-full rounded-lg border border-cyan-900/30 opacity-20" />
-        )}
+        <ProjectPreview project={project} />
 
-        {/* Title */}
-        <h2 className="font-mono text-sm font-semibold tracking-[0.04em] text-cyan-300">
+        <h2 className="text-lg font-semibold tracking-tight text-slate-50">
           {project.title}
         </h2>
 
-        {/* Description */}
+        <p className="text-sm font-medium leading-relaxed text-slate-200">
+          {project.summary}
+        </p>
         <p className="text-sm leading-relaxed text-slate-400">
           {project.description}
         </p>

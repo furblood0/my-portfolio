@@ -5,8 +5,9 @@ import { SKILL_GROUPS } from "@/data/skills";
 import { SkillCategoryCard } from "@/components/skills/SkillCategoryCard";
 
 export function SkillsPanel() {
-  const allIds = SKILL_GROUPS.flatMap((g) => g.categories.map((c) => c.id));
-  const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set(allIds));
+  const [expandedIds, setExpandedIds] = useState<Set<string>>(
+    () => new Set(["frontend", "backend", "mobile", "tools", "spoken"]),
+  );
 
   const handleExpand = (id: string) =>
     setExpandedIds((prev) => new Set(prev).add(id));

@@ -29,26 +29,44 @@ export function AboutPanel() {
   return (
     <div className="flex flex-col gap-8">
 
-      {/* Avatar + title */}
-      <div className="flex flex-col items-center gap-4 pt-2">
-        <div className="relative flex h-24 w-24 items-center justify-center rounded-full border border-cyan-900/60 bg-slate-900">
+      <div className="flex items-start gap-4">
+        <div className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-cyan-900/60 bg-slate-900">
           <span aria-hidden className="absolute inset-[-5px] rounded-full border border-dashed border-slate-700/50" />
-          <span aria-hidden className="absolute inset-[-11px] rounded-full border border-slate-800/40" />
-          <span className="font-mono text-2xl font-semibold text-slate-400">
-            {ABOUT.name.charAt(0)}
+          <span className="font-mono text-sm font-semibold tracking-[0.12em] text-cyan-300/90">
+            FF
           </span>
         </div>
-        <div className="text-center">
-          <p className="font-mono text-sm font-semibold tracking-[0.1em] text-slate-200">
-            {ABOUT.name}
+        <div className="min-w-0 pt-0.5">
+          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-cyan-400/80">
+            {ABOUT.availability}
           </p>
-          <p className="mt-0.5 font-mono text-[11px] tracking-[0.14em] text-cyan-500/80">
+          <h2 className="mt-1 text-xl font-semibold tracking-tight text-slate-50 sm:text-2xl">
+            {ABOUT.name}
+          </h2>
+          <p className="mt-1 text-sm text-slate-400">
             {ABOUT.title}
+            <span className="mx-1.5 text-slate-600">·</span>
+            {ABOUT.location}
           </p>
         </div>
       </div>
 
-      {/* Bio */}
+      <p className="text-[15px] leading-7 text-slate-200">{ABOUT.focus}</p>
+
+      <dl className="grid grid-cols-2 gap-2">
+        {ABOUT.highlights.map((item) => (
+          <div
+            key={item.label}
+            className="rounded-lg border border-slate-800/80 bg-slate-900/50 px-3 py-2.5"
+          >
+            <dt className="font-mono text-[10px] uppercase tracking-[0.16em] text-cyan-400/70">
+              {item.label}
+            </dt>
+            <dd className="mt-1 text-sm leading-snug text-slate-200">{item.value}</dd>
+          </div>
+        ))}
+      </dl>
+
       <div className="flex flex-col gap-3">
         <SectionHeader label="Bio" />
         {ABOUT.bio.map((paragraph, i) => (
@@ -78,10 +96,10 @@ export function AboutPanel() {
         <a
           href="/cv.pdf"
           download
-          className="flex w-full items-center justify-center gap-2.5 rounded-lg border border-slate-700/60 bg-slate-900/50 px-5 py-3 font-mono text-sm tracking-[0.12em] text-slate-300 transition-colors hover:border-cyan-600/60 hover:bg-slate-900/80 hover:text-cyan-300"
+          className="flex w-full items-center justify-center gap-2.5 rounded-lg border border-cyan-700/50 bg-cyan-950/30 px-5 py-3 text-sm font-medium tracking-wide text-cyan-100 transition-colors hover:border-cyan-400/70 hover:bg-cyan-950/50 hover:text-cyan-50"
         >
           <DownloadIcon />
-          Download CV //
+          Download CV
         </a>
       </div>
 

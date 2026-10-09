@@ -12,9 +12,18 @@ const jetBrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
+const title = "Furkan Fidan — Software Developer";
+const description =
+  "Computer engineer building web and mobile products with Flutter, TypeScript, and Node.js. Research at the University of Groningen. Selected work, background, and contact.";
+
 export const metadata: Metadata = {
-  title: "Furkan Fidan — Software Developer",
-  description: "Engineering schematic inspired portfolio experience.",
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    type: "website",
+  },
 };
 
 export default function RootLayout({

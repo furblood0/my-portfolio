@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { type Project } from "@/data/projects";
+import { ProjectPreview } from "@/components/projects/ProjectPreview";
 
 type Props = {
   project: Project;
@@ -68,17 +68,16 @@ export function ProjectCard({
         <div className="flex min-w-0 flex-1 flex-col gap-2">
           {/* Title */}
           <h2
-            className={`font-mono text-sm font-semibold tracking-[0.04em] transition-colors duration-200 ${
+            className={`text-[15px] font-semibold tracking-tight transition-colors duration-200 ${
               isExpanded ? "text-cyan-300" : "text-slate-100"
             }`}
           >
             {project.title}
           </h2>
 
-          {/* Collapsed description — truncated */}
           {!isExpanded && (
-            <p className="line-clamp-2 text-sm leading-relaxed text-slate-500">
-              {project.description}
+            <p className="text-sm leading-relaxed text-slate-400">
+              {project.summary}
             </p>
           )}
 
@@ -131,23 +130,11 @@ export function ProjectCard({
             className="overflow-hidden"
           >
             <div className="flex flex-col gap-4 border-t border-slate-800/60 px-5 pb-5 pt-4">
-              {/* Preview image — fixed 16:9 box, dark bg fills empty space */}
-              {project.image ? (
-                <div className="relative w-full overflow-hidden rounded-lg border border-slate-700/50 aspect-video">
-                  <div className="blueprint-grid absolute inset-0 opacity-25" />
-                  <Image
-                    src={project.image}
-                    alt={`${project.title} preview`}
-                    fill
-                    className="object-contain"
-                    sizes="(min-width: 1280px) 512px, (min-width: 1024px) 460px, 100vw"
-                  />
-                </div>
-              ) : (
-                <div className="blueprint-grid aspect-video w-full rounded-lg border border-slate-800/40 opacity-25" />
-              )}
+              <ProjectPreview project={project} />
 
-              {/* Full description */}
+              <p className="text-sm font-medium leading-relaxed text-slate-200">
+                {project.summary}
+              </p>
               <p className="text-sm leading-relaxed text-slate-400">
                 {project.description}
               </p>

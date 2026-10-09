@@ -18,9 +18,19 @@ export type EducationItem = {
   description?: string;
 };
 
+export type Highlight = {
+  label: string;
+  value: string;
+};
+
 export type AboutData = {
   name: string;
   title: string;
+  location: string;
+  availability: string;
+  focus: string;
+  proof: string[];
+  highlights: Highlight[];
   bio: string[];
   experience: ExperienceItem[];
   education: EducationItem[];
@@ -29,9 +39,19 @@ export type AboutData = {
 export const ABOUT: AboutData = {
   name: "Furkan Fidan",
   title: "Software Developer",
+  location: "Konya, Turkey",
+  availability: "Open to software roles",
+  focus: "I build web and mobile products, and I care about how they behave when the network, the data, or the device is not ideal.",
+  proof: ["Fleet tracking live", "Groningen research", "TÜBİTAK 3501"],
+  highlights: [
+    { label: "Now", value: "STEM Instructor, Konya Science Center" },
+    { label: "Research", value: "University of Groningen" },
+    { label: "Scholarship", value: "TÜBİTAK 3501" },
+    { label: "Degree", value: "Computer Engineering · 3.13 GPA" },
+  ],
   bio: [
-    "Hi, I'm Furkan. I am a Computer Engineering graduate with an international research background and hands-on experience in modern web (Node.js/TypeScript) and cross-platform mobile (Flutter) ecosystems.",
-    "I specialize in architecting native solutions with minimal external dependencies, designing RESTful APIs, and developing practical software focused on network optimization."
+    "Computer Engineering graduate. I ship cross-platform apps in Flutter, full-stack products in TypeScript and Node.js, and small systems that stay understandable: native modules, clear REST APIs, and as few dependencies as the problem allows.",
+    "A research term at the University of Groningen was SDN load balancing on Ryu and Mininet. I also contributed to a TÜBİTAK 3501 project on machine learning for corneal imaging. I am looking for a software engineering role where the work leaves the repo and reaches people.",
   ],
   experience: [
     {
@@ -62,7 +82,7 @@ export const ABOUT: AboutData = {
       company: "University of Health Sciences & Ankara Bilkent City Hospital",
       location: "Remote",
       type: "Internship",
-      description: "Contributed to a TUBITAK 3501 project focused on developing a machine learning model for corneal endothelialcell analysis in DMEK surgery patients."
+      description: "Contributed to a TÜBİTAK 3501 project developing a machine learning model for corneal endothelial cell analysis in DMEK surgery patients."
     },
     {
       period: "Jun 2025 – Jul 2025",

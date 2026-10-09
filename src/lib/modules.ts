@@ -1,6 +1,7 @@
 export type ModuleDef = {
   id: string;
   label: string;
+  detail: string;
   fx: number;
   fy: number;
   flow: string;
@@ -20,8 +21,9 @@ export const MODULES_DEF: ModuleDef[] = [
   {
     id: "projects",
     label: "Projects",
+    detail: "Selected work",
     fx: 0.21,
-    fy: 0.16,
+    fy: 0.24,
     flow: "4.8s",
     c1: [0.28, -0.08],
     c2: [0.62, -0.28],
@@ -29,6 +31,7 @@ export const MODULES_DEF: ModuleDef[] = [
   {
     id: "skills",
     label: "Skills",
+    detail: "Stack",
     fx: 0.8,
     fy: 0.28,
     flow: "5.5s",
@@ -38,8 +41,9 @@ export const MODULES_DEF: ModuleDef[] = [
   {
     id: "about",
     label: "About",
+    detail: "Background",
     fx: 0.28,
-    fy: 0.83,
+    fy: 0.76,
     flow: "6.2s",
     c1: [0.16, 0.22],
     c2: [0.58, 0.42],
@@ -47,6 +51,7 @@ export const MODULES_DEF: ModuleDef[] = [
   {
     id: "contact",
     label: "Contact",
+    detail: "Reach me",
     fx: 0.84,
     fy: 0.72,
     flow: "5.8s",
@@ -60,12 +65,43 @@ export function getRouteDelay(index: number): number {
   return 0.08 + index * 0.12;
 }
 
+/** Phone portrait: keep buttons in the corners, clear of the core and the chrome. */
+const PHONE: Record<string, [number, number]> = {
+  projects: [0.22, 0.24],
+  skills: [0.78, 0.32],
+  about: [0.24, 0.78],
+  contact: [0.78, 0.7],
+};
+
+/** Short phone (SE, browser chrome): pull the top pair up and the bottom pair down. */
+const PHONE_SHORT: Record<string, [number, number]> = {
+  projects: [0.24, 0.2],
+  skills: [0.76, 0.28],
+  about: [0.26, 0.8],
+  contact: [0.76, 0.68],
+};
+
+/** Wide but short (phone landscape, small window). */
+const SHORT: Record<string, [number, number]> = {
+  projects: [0.15, 0.26],
+  skills: [0.85, 0.32],
+  about: [0.18, 0.76],
+  contact: [0.85, 0.7],
+};
+
 export function computeModules(vp: { w: number; h: number }): ComputedModule[] {
-  return MODULES_DEF.map((m) => ({
-    ...m,
-    x: Math.round(m.fx * vp.w),
-    y: Math.round(m.fy * vp.h),
-  }));
+  const narrow = vp.w < 640;
+  const short = vp.h < 720;
+  const spots = narrow ? (short ? PHONE_SHORT : PHONE) : short ? SHORT : null;
+
+  return MODULES_DEF.map((m) => {
+    const [fx, fy] = spots?.[m.id] ?? [m.fx, m.fy];
+    return {
+      ...m,
+      x: Math.round(fx * vp.w),
+      y: Math.round(fy * vp.h),
+    };
+  });
 }
 
 export function getCurveData(

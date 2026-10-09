@@ -9,6 +9,7 @@ import { computeModules, MODULES_DEF } from "@/lib/modules";
 import { moduleUrl, parseModuleHash } from "@/lib/hash";
 
 import { BlueprintGrid } from "@/components/home/BlueprintGrid";
+import { SiteChrome } from "@/components/home/SiteChrome";
 import { ConnectionLines } from "@/components/home/ConnectionLines";
 import { CoreRings } from "@/components/home/CoreRings";
 import { BootRipple } from "@/components/home/BootRipple";
@@ -110,11 +111,12 @@ export default function Home() {
 
   return (
     <main
-      className="relative h-screen w-screen overflow-hidden bg-slate-950 text-slate-100"
+      className="relative h-dvh w-full overflow-hidden bg-slate-950 text-slate-100"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
       <BlueprintGrid gridX={gridX} gridY={gridY} />
+      <SiteChrome concealed={Boolean(activeModule)} />
 
       {/* Side panels — rendered outside the scene so they don't shift with it */}
       <AnimatePresence>

@@ -18,7 +18,7 @@ export function ModuleButton({ module, index, isActive, onToggle }: Props) {
     <motion.button
       type="button"
       onClick={() => onToggle(module.id)}
-      className={`absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-xl border bg-slate-950/80 px-6 py-3 font-mono text-sm tracking-[0.16em] transition ${
+      className={`absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-lg border bg-slate-950/80 px-6 py-3 font-mono text-sm tracking-[0.16em] transition compact:rounded-md compact:px-2.5 compact:py-1.5 compact:text-[11px] compact:tracking-[0.1em] ${
         isActive ? "text-cyan-300" : "text-slate-200 hover:text-cyan-300"
       }`}
       style={{ left: module.x, top: module.y }}
@@ -46,7 +46,12 @@ export function ModuleButton({ module, index, isActive, onToggle }: Props) {
             : { duration: 1.2, delay: moduleDelay + 0.2, times: [0, 0.35, 1] }
         }
       />
-      <span className="relative z-10">{module.label}</span>
+      <span className="relative z-10 flex flex-col items-center gap-0.5">
+        <span>{module.label}</span>
+        <span className="font-sans text-[10px] normal-case tracking-normal text-slate-500 compact:hidden">
+          {module.detail}
+        </span>
+      </span>
     </motion.button>
   );
 }

@@ -31,7 +31,7 @@ export function PanelContainer({ side, title, panelWidth, onClose, children }: P
 
   return (
     <motion.aside
-      className={`fixed top-0 z-30 flex h-screen flex-col bg-slate-950/[0.97] backdrop-blur-md ${
+      className={`fixed top-0 z-30 flex h-dvh flex-col bg-slate-950/[0.97] backdrop-blur-md ${
         isLeft
           ? "left-0 border-r border-slate-700/50"
           : "right-0 border-l border-slate-700/50"
@@ -48,7 +48,7 @@ export function PanelContainer({ side, title, panelWidth, onClose, children }: P
       <div aria-hidden className="blueprint-grid pointer-events-none absolute inset-0 opacity-[0.06]" />
 
       {/* Header */}
-      <div className="relative flex shrink-0 items-center justify-between border-b border-slate-800/60 px-6 py-4">
+      <div className="relative flex shrink-0 items-center justify-between border-b border-slate-800/60 px-4 py-3 pt-[max(0.75rem,env(safe-area-inset-top))] sm:px-6 sm:py-4">
         <div className="flex items-center gap-3">
           <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" aria-hidden />
           <span className="font-mono text-[11px] uppercase tracking-[0.28em] text-cyan-400/90">
@@ -59,14 +59,14 @@ export function PanelContainer({ side, title, panelWidth, onClose, children }: P
           type="button"
           onClick={onClose}
           aria-label="Close panel"
-          className="flex h-6 w-6 items-center justify-center rounded border border-slate-700/60 font-mono text-base leading-none text-slate-500 transition-colors hover:border-cyan-600/60 hover:text-cyan-400"
+          className="flex h-8 w-8 items-center justify-center rounded border border-slate-700/60 font-mono text-base leading-none text-slate-500 transition-colors hover:border-cyan-600/60 hover:text-cyan-400"
         >
           ×
         </button>
       </div>
 
       {/* Scrollable content */}
-      <div className="relative flex-1 overflow-y-auto px-6 py-6">
+      <div className="relative flex-1 overflow-y-auto px-4 py-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] sm:px-6 sm:py-6">
         {children}
       </div>
     </motion.aside>

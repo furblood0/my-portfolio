@@ -19,12 +19,28 @@ type Props = {
   onCollapse: (id: string) => void;
 };
 
-const TECH_LEVEL_STYLE: Record<TechLevel, string> = {
-  expert:       "border-cyan-700/60 bg-cyan-950/40 text-cyan-400",
-  proficient:   "border-blue-700/50 bg-blue-950/30 text-blue-400",
-  intermediate: "border-slate-600/50 bg-slate-800/40 text-slate-400",
-  beginner:     "border-slate-700/40 bg-slate-900/30 text-slate-600",
+const TECH_LEVEL_FILLED: Record<TechLevel, number> = {
+  expert: 4,
+  proficient: 3,
+  intermediate: 2,
+  beginner: 1,
 };
+
+function LevelMeter({ level }: { level: TechLevel }) {
+  const filled = TECH_LEVEL_FILLED[level];
+  return (
+    <span className="flex items-center gap-0.5" title={level}>
+      <span className="sr-only">{level}</span>
+      {[1, 2, 3, 4].map((step) => (
+        <span
+          key={step}
+          aria-hidden
+          className={`h-1 w-2 rounded-sm ${step <= filled ? "bg-cyan-400" : "bg-slate-700"}`}
+        />
+      ))}
+    </span>
+  );
+}
 
 const LANG_LEVEL_STYLE: Record<string, string> = {
   Native: "border-emerald-700/60 bg-emerald-950/40 text-emerald-400",
@@ -114,38 +130,23 @@ export function SkillCategoryCard({ category, index, isExpanded, onExpand, onCol
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="overflow-hidden"
           >
-            <ul className="flex flex-col gap-2.5 border-t border-slate-800/60 px-5 pb-5 pt-4">
+            <ul className="flex flex-wrap gap-2 border-t border-slate-800/60 px-5 pb-5 pt-4">
               {sortedItems.map((item) => (
-                <li key={item.name} className="flex items-center justify-between gap-3">
-                  <span className="font-mono text-sm text-slate-300">{item.name}</span>
-
-                  <div className="flex shrink-0 flex-col items-end gap-0.5">
-                    {/* Level badge */}
-                    {item.kind === "tech" && (
-                      <span
-                        className={`rounded border px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.14em] ${
-                          TECH_LEVEL_STYLE[item.level]
-                        }`}
-                      >
-                        {item.level}
-                      </span>
-                    )}
-                    {item.kind === "lang" && (
-                      <span
-                        className={`rounded border px-2 py-0.5 font-mono text-[9px] tracking-[0.12em] ${
-                          LANG_LEVEL_STYLE[item.level] ?? LANG_LEVEL_STYLE["B1"]
-                        }`}
-                      >
-                        {item.level}
-                      </span>
-                    )}
-
-                    {/* Note (lang & interest) */}
-                    {(item.kind === "lang" || item.kind === "interest" || item.kind === "method") &&
-                      "note" in item && item.note && (
-                        <span className="font-mono text-[10px] text-slate-600">{item.note}</span>
-                      )}
-                  </div>
+                <li
+                  key={item.name}
+                  className="flex items-center gap-2 rounded-md border border-slate-700/70 bg-slate-950/60 px-2.5 py-1.5"
+                >
+                  <span className="text-sm text-slate-200">{item.name}</span>
+                  {item.kind === "tech" && <LevelMeter level={item.level} />}
+                  {item.kind === "lang" && (
+                    <span
+                      className={`rounded border px-1.5 py-0.5 font-mono text-[9px] tracking-[0.08em] ${
+                        LANG_LEVEL_STYLE[item.level] ?? LANG_LEVEL_STYLE["B1"]
+                      }`}
+                    >
+                      {item.level}
+                    </span>
+                  )}
                 </li>
               ))}
             </ul>
