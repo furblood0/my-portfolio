@@ -52,14 +52,8 @@ export function SiteChrome({ concealed }: Props) {
       </header>
 
       <div className="absolute inset-x-0 bottom-0 flex justify-center px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:pb-6">
-        <p className="max-w-xl text-center text-[11px] leading-5 text-slate-400 sm:text-[13px] sm:leading-6">
-          <span className="font-medium text-slate-200">{ABOUT.availability}</span>
-          {ABOUT.proof.map((item) => (
-            <span key={item} className="compact:hidden">
-              <span className="mx-2 text-slate-600">/</span>
-              {item}
-            </span>
-          ))}
+        <p className="text-center text-[11px] font-medium leading-5 text-slate-200 sm:text-[13px] sm:leading-6">
+          {ABOUT.availability}
         </p>
       </div>
     </motion.div>

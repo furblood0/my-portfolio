@@ -6,7 +6,7 @@ import { SkillCategoryCard } from "@/components/skills/SkillCategoryCard";
 
 export function SkillsPanel() {
   const [expandedIds, setExpandedIds] = useState<Set<string>>(
-    () => new Set(["frontend", "backend", "mobile", "tools", "spoken"]),
+    () => new Set(["interface", "services", "systems", "tools", "spoken"]),
   );
 
   const handleExpand = (id: string) =>

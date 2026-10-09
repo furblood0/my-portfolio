@@ -22,7 +22,7 @@ What each file in this repo does. Content lives in `src/data/`; the home canvas 
 | Path | Role |
 |---|---|
 | `public/cv.pdf` | CV download from the About panel. |
-| `public/previews/portfolio.png` | Local preview image for this site in Projects. |
+| `public/previews/` | Screenshots shown on project cards. |
 | `src/app/favicon.ico` | Browser tab icon. |
 
 ## App shell — `src/app`

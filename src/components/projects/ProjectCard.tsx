@@ -59,12 +59,15 @@ export function ProjectCard({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.45, delay: index * 0.08, ease: "easeOut" }}
-      onClick={() => {
-        if (!isExpanded) onExpand(project.id);
-      }}
     >
-      {/* ── Header (always visible) ── */}
-      <div className="flex items-start justify-between gap-3 p-5">
+      {/* Header toggles the card. The open body stays put so links and the photo are easy to use. */}
+      <div
+        className="flex cursor-pointer items-start justify-between gap-3 p-5"
+        onClick={() => {
+          if (isExpanded) onCollapse(project.id);
+          else onExpand(project.id);
+        }}
+      >
         <div className="flex min-w-0 flex-1 flex-col gap-2">
           {/* Title */}
           <h2
@@ -140,7 +143,7 @@ export function ProjectCard({
               </p>
 
               {/* Links */}
-              {(project.github ?? project.live) && (
+              {(project.github || project.live) && (
                 <div className="flex items-center gap-3">
                   {project.github && (
                     <a

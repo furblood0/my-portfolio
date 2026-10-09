@@ -44,7 +44,7 @@ export const ABOUT: AboutData = {
   focus: "I build web and mobile products, and I care about how they behave when the network, the data, or the device is not ideal.",
   proof: ["Fleet tracking live", "Groningen research", "TÜBİTAK 3501"],
   highlights: [
-    { label: "Now", value: "STEM Instructor, Konya Science Center" },
+    { label: "Now", value: "Not currently employed" },
     { label: "Research", value: "University of Groningen" },
     { label: "Scholarship", value: "TÜBİTAK 3501" },
     { label: "Degree", value: "Computer Engineering · 3.13 GPA" },
@@ -55,14 +55,14 @@ export const ABOUT: AboutData = {
   ],
   experience: [
     {
-      period: "Jul. 2026 – Present",
+      period: "Jul 2026 – Oct 2026",
       title: "STEM Instructor",
       company: "Konya Science Center",
       location: "Konya, Turkey",
-      type: "Internship",
+      type: "Part-time",
       description: [
-        "Conduct LEGO SPIKE Prime / robotics coding and STEM workshops for student groups to foster algorithmic thinking and problem-solving skills.",
-        "Lead interactive guided tours and deliver scientific and technical demonstrations across multidisciplinary exhibition galleries.",
+        "Conducted LEGO SPIKE Prime and robotics coding workshops for student groups, focused on algorithmic thinking and problem-solving.",
+        "Led guided tours and scientific demonstrations across the exhibition galleries.",
       ],
     },
     {
@@ -78,10 +78,10 @@ export const ABOUT: AboutData = {
     },
     {
       period: "May 2025 – Nov. 2025",
-      title: "Undergraduate Researcher (TUBITAK 3501 Scholar)",
+      title: "Undergraduate Researcher (TÜBİTAK 3501 Scholar)",
       company: "University of Health Sciences & Ankara Bilkent City Hospital",
       location: "Remote",
-      type: "Internship",
+      type: "Scholarship",
       description: "Contributed to a TÜBİTAK 3501 project developing a machine learning model for corneal endothelial cell analysis in DMEK surgery patients."
     },
     {

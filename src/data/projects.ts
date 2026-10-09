@@ -19,6 +19,20 @@ export type Project = {
 
 export const PROJECTS: Project[] = [
   {
+    id: "blindkeys",
+    title: "BlindKeys",
+    description:
+      "Everyone sees the same sentence that day. You memorize it, the screen goes dark, and you type without seeing the letters. The server scores the round and tells you where your hands drifted on a Turkish Q keyboard.",
+    summary:
+      "Memorize the day's sentence, type it in the dark, and the server tells you where your hands drifted.",
+    tags: ["React", "TypeScript", "Vite", "Tailwind CSS", "Vercel", "Neon"],
+    category: "web",
+    featured: true,
+    image: "/previews/blindkeys.png",
+    year: "2026",
+    live: "https://www.blindkeys.com/",
+  },
+  {
     id: "servis-takip-sistemi",
     title: "Servis Takip Sistemi",
     description:
@@ -27,11 +41,63 @@ export const PROJECTS: Project[] = [
       "Live fleet tracking on web and Android: telemetry, weak-signal trips, and geofenced completion.",
     tags: ["Flutter", "Dart", "OpenStreetMap", "Geofencing", "REST API"],
     category: "mobile",
-    featured: true,
-    image: "",
+    featured: false,
     year: "2026",
     live: "https://kbm-servis-takip.web.app/",
     github: "",
+  },
+  {
+    id: "bbuddy",
+    title: "BBuddy",
+    description:
+      "A quiet budget app for student spending: allowance, scholarships, dorm costs, groceries, and subscriptions. Set a limit at the start of the month, record money in and money out, and the home screen shows what remains, how much of the limit is used, and the net. It does not connect to a bank or write to a server. Everything entered stays on the device.",
+    summary:
+      "Student budget on the phone: a monthly limit, income and spending, kept only on the device.",
+    tags: ["Flutter", "Dart"],
+    category: "mobile",
+    featured: false,
+    image: "/previews/bbuddy.jpg",
+    year: "2026",
+    github: "https://github.com/furblood0/bbuddy",
+  },
+  {
+    id: "smartrestoran",
+    title: "SmartRestoran",
+    description:
+      "A working demo of the handoff between waiter and kitchen in a single restaurant. The waiter orders from the available menu, the kitchen sees the ticket, and a ready dish waits on screen for the table. No payments, sign-in, or multiple branches. Database passwords exist only for local Docker.",
+    summary:
+      "Waiter-to-kitchen handoff for one restaurant: menu order, kitchen ticket, and a table waiting on screen.",
+    tags: ["Java", "Spring Boot", "Spring Cloud Gateway", "Eureka", "PostgreSQL", "React", "Docker"],
+    category: "web",
+    image: "/previews/smartrestoran.png",
+    year: "2026",
+    github: "https://github.com/furblood0/smartrestoran",
+  },
+  {
+    id: "netshield",
+    title: "NetShield SDN",
+    description:
+      "An SDN controller that balances traffic, fails over when a server or link drops, and keeps a live view of the network. Client traffic is shared across servers behind one address, and a reverse NAT hides that split. The controller sends heartbeats, marks a dead server down, and shifts traffic to the ones still up. A source that sends packets faster than the threshold is dropped at the switch. Servers that join are learned by MAC, and a FastAPI panel shows health and blocked traffic.",
+    summary:
+      "SDN load balancing, failover, and switch-level protection, with a live network panel.",
+    tags: ["Python", "Ryu", "OpenFlow", "Mininet", "FastAPI", "Docker"],
+    category: "backend",
+    year: "2026",
+    github: "https://github.com/furblood0/netshield",
+  },
+  {
+    id: "kenar",
+    title: "Kenar",
+    description:
+      "A fast and modern note-taking Chrome extension accessible with a single click from the toolbar. Supports multiple notes, real-time search by title and content, note pinning, dark/light theme, and syncs across all Chrome-connected devices via chrome.storage.sync.",
+    summary:
+      "Chrome notes from the toolbar: search, pins, themes, and sync across signed-in devices.",
+    tags: ["React", "TypeScript", "Vite", "Tailwind CSS", "Chrome Extension"],
+    category: "tool",
+    image: "/previews/kenar.png",
+    year: "2025",
+    github: "https://github.com/furblood0/not-defteri-chrome-extension",
+    live: "https://chromewebstore.google.com/detail/lhgeipjalllkjpjdcjifeplpjjoncmpo",
   },
   {
     id: "movie-tracker",
@@ -43,13 +109,13 @@ export const PROJECTS: Project[] = [
     tags: ["Vanilla JavaScript", "Node.js/node:http", "TMDb API", "SQLite", "CSS3"],
     category: "web",
     featured: false,
-    image: "",
+    image: "/previews/movie-tracker.jpg",
     year: "2026",
     github: "https://github.com/furblood0/movie-tracker",
   },
   {
-    id: "myblog",
-    title: "MyBlog",
+    id: "murekkep",
+    title: "Mürekkep",
     description:
       "A full-stack blog platform with JWT authentication, post management with a draft/published workflow, and a dark distraction-free editor with live preview. Cover images can be uploaded or linked externally. Backed by PostgreSQL running in Docker, served via a Node.js/Express REST API.",
     summary:
@@ -57,24 +123,9 @@ export const PROJECTS: Project[] = [
     tags: ["React", "Node.js", "Express.js", "PostgreSQL", "Docker", "JWT"],
     category: "web",
     featured: false,
-    image: "https://raw.githubusercontent.com/furblood0/MyBlogProject/main/project1/public/dashboard.png",
+    image: "/previews/murekkep.png",
     year: "2025",
     github: "https://github.com/furblood0/MyBlogProject",
-  },
-  {
-    id: "fastnote",
-    title: "FastNote",
-    description:
-      "A fast and modern note-taking Chrome extension accessible with a single click from the toolbar. Supports multiple notes, real-time search by title and content, note pinning, dark/light theme, and syncs across all Chrome-connected devices via chrome.storage.sync.",
-    summary:
-      "Chrome notes from the toolbar: search, pins, themes, and sync across signed-in devices.",
-    tags: ["React", "TypeScript", "Vite", "Tailwind CSS", "Chrome Extension"],
-    category: "tool",
-    image:
-      "https://raw.githubusercontent.com/furblood0/not-defteri-chrome-extension/main/assets/ss3.png",
-    year: "2025",
-    github: "https://github.com/furblood0/not-defteri-chrome-extension",
-    live: "https://chromewebstore.google.com/detail/lhgeipjalllkjpjdcjifeplpjjoncmpo",
   },
   {
     id: "netchat",
@@ -87,6 +138,19 @@ export const PROJECTS: Project[] = [
     category: "desktop",
     year: "2025",
     github: "https://github.com/furblood0/network",
+  },
+  {
+    id: "mesaj-tahtasi",
+    title: "Mesaj Tahtası",
+    description:
+      "A small note board on Ethereum. Connect a wallet, send a short note with a little ETH, and the note stays inside the contract. Posting needs at least 0.0001 ETH. Empty notes and notes over 280 bytes are rejected. The writer is stored as the sending address. Reading the board does not ask the wallet to sign. Only the address that deployed the board can withdraw what has accumulated, and the notes are not deleted.",
+    summary:
+      "An Ethereum note board: a wallet, a short note with a little ETH, kept inside the contract.",
+    tags: ["Solidity", "Hardhat", "Ethereum"],
+    category: "web",
+    image: "/previews/mesaj-tahtasi.png",
+    year: "2026",
+    github: "https://github.com/furblood0/Ethereum",
   },
   {
     id: "minigame",
@@ -115,31 +179,5 @@ export const PROJECTS: Project[] = [
       "https://raw.githubusercontent.com/furblood0/Youtube-clone/master/ss1.png",
     year: "2023",
     github: "https://github.com/furblood0/Youtube-clone",
-  },
-  {
-    id: "portfolio-v1",
-    title: "Portfolio Old Version",
-    description:
-      "Previous-generation personal portfolio built with React and TypeScript. Features a Markdown-powered blog system, a backend-integrated contact form with a secure admin panel for message management, and a project showcase with category filtering. Frontend on GitHub Pages, backend on Render.",
-    summary: "Previous portfolio: a Markdown blog, a contact inbox, and an admin panel.",
-    tags: ["React", "TypeScript", "Vite", "Express.js", "SQLite", "CSS3"],
-    category: "web",
-    archive: true,
-    year: "2025",
-    github: "https://github.com/furblood0/furblood0.github.io",
-    live: "https://furblood0.github.io/",
-  },
-  {
-    id: "portfolio",
-    title: "Portfolio Site",
-    description:
-      "Personal portfolio site with a sci-fi schematic aesthetic. Features an interactive main canvas built with Framer Motion animations and a sliding panel system.",
-    summary: "This site. A schematic canvas that opens the work, the stack, and a way to reach me.",
-    tags: ["Next.js", "TypeScript", "Framer Motion", "Tailwind CSS"],
-    category: "web",
-    year: "2026",
-    image: "/previews/portfolio.png",
-    github: "https://github.com/furblood0",
-    live: "/",
   },
 ];

@@ -81,7 +81,7 @@ export function FeaturedProjectCard({ project }: { project: Project }) {
         </div>
 
         {/* Links */}
-        {(project.github ?? project.live) && (
+        {(project.github || project.live) && (
           <div className="flex items-center gap-3">
             {project.github && (
               <a
